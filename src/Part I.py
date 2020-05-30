@@ -29,5 +29,18 @@ def t5():
     b = N.cdf(0.5)  # P( X < 0.5)
     print('a)', b)
 
+
+def t9():
+    print('9')
+
+    mu = 50.
+    sigma = 5.
+    N = stats.norm(mu, sigma)
+
+    a = N.ppf(0.1)  # P(T > 0.9) = P(T < 0.1)
+    print('a)', a)
+
+
 t1()
 t5()
+t9()
