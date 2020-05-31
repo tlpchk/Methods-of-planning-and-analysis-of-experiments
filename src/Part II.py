@@ -1,5 +1,5 @@
 import numpy as np
-import scipy.stats as stats
+from scipy.stats import t, norm
 
 
 def t3():
@@ -11,10 +11,30 @@ def t3():
     x_m = np.mean(X)
     n = len(X)
 
-    N = stats.norm(0, 1)
+    N = norm(0, 1)
     L = x_m - N.ppf(1 - alpha / 2) * sigma / np.sqrt(n)
     P = x_m + N.ppf(1 - alpha / 2) * sigma / np.sqrt(n)
     print(f'[{L},{P}]')
 
 
+def t4():
+    print('4')
+    X = np.array([383, 284, 339, 340, 305, 386, 378, 335, 344, 346])
+    alpha1 = 0.1
+    alpha2 = 0.05
+
+    x_m = np.mean(X)
+    n = len(X)
+    S = np.sqrt(1 / (n - 1) * np.sum((X - x_m) ** 2))
+
+    L1 = x_m - t.ppf(1 - alpha1 / 2, n - 1) * S / np.sqrt(n)
+    P1 = x_m + t.ppf(1 - alpha1 / 2, n - 1) * S / np.sqrt(n)
+    print(f'1-a = {1 - alpha1} => [L,P] = [{L1},{P1}]')
+
+    L2 = x_m - t.ppf(1 - alpha2 / 2, n - 1) * S / np.sqrt(n)
+    P2 = x_m + t.ppf(1 - alpha2 / 2, n - 1) * S / np.sqrt(n)
+    print(f'1-a = {1 - alpha2} => [L,P] = [{L2},{P2}]')
+
+
 t3()
+t4()
