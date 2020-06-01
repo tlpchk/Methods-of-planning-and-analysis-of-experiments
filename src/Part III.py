@@ -31,5 +31,25 @@ def t3():
     print(f'H0 is ok if {T} in [-inf, {t_p}]')
     print(f'Is H0 ok? : {T < t_p}')
 
+def t4():
+    print('# 4')
+    X = np.array([220., 185., 270., 285., 200., 295., 255., 190., 225., 230.])
+    Y = np.array([190., 175., 215., 260., 215., 195., 260., 150., 155., 175])
+    a = 0.05
+
+    D = X - Y
+
+    d_m = D.mean()
+
+    n = len(D)
+
+    S = np.sqrt(1 / (n - 1) * sum((D-d_m)** 2))
+    T = d_m/(S/np.sqrt(n))
+
+    t_p = t.ppf(1 - a, n-1)
+
+    print(f'H0 is ok if {T} smaller than {t_p}')
+    print(f'Is H0 ok? : {T < t_p}')
 
 t3()
+t4()
