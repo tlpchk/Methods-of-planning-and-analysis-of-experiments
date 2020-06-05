@@ -29,6 +29,21 @@ def t5():
     b = N.cdf(0.5)  # P( X < 0.5)
     print('a)', b)
 
+def t6():
+    print(6)
+
+    mu = 2.
+    sigma = 3.  # Attention! variance = sigma ^ 2
+    N = stats.norm(mu, sigma)
+    N0 = stats.norm(0, 1)
+
+    b = N0.ppf(0.95)  # P(X <= 0.95)
+    a = b * sigma + mu
+    print('a)', a)
+
+    b2 = N0.isf(0.25)  # P(X > 0.25)
+    a2 = b2 * sigma + mu
+    print('a2)', a2)
 
 def t9():
     print('9')
@@ -43,4 +58,5 @@ def t9():
 
 t1()
 t5()
+t6()
 t9()
