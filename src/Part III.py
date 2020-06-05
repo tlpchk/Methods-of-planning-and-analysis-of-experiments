@@ -2,8 +2,16 @@ import numpy as np
 from scipy.stats import t
 
 
+def t1():
+    print('1')
+
+
+def t2():
+    print('2')
+
+
 def t3():
-    print('# 3')
+    print('3')
     X = np.array([24.3, 20.8, 23.7, 21.3, 17.4])
     Y = np.array([18.2, 16.9, 20.2, 16.7])
     a = 0.05
@@ -31,8 +39,9 @@ def t3():
     print(f'H0 is ok if {T} in [-inf, {t_p}]')
     print(f'Is H0 ok? : {T < t_p}')
 
+
 def t4():
-    print('# 4')
+    print('4')
     X = np.array([220., 185., 270., 285., 200., 295., 255., 190., 225., 230.])
     Y = np.array([190., 175., 215., 260., 215., 195., 260., 150., 155., 175])
     a = 0.05
@@ -51,5 +60,12 @@ def t4():
     print(f'H0 is ok if {T} smaller than {t_p}')
     print(f'Is H0 ok? : {T < t_p}')
 
+
+print('__________________________________')
+t1()
+print('__________________________________')
+t2()
+print('__________________________________')
 t3()
+print('__________________________________')
 t4()
