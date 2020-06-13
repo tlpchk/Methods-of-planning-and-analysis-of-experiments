@@ -8,6 +8,49 @@ def t1():
 
 def t2():
     print('2')
+    n = 6
+    alfa = 0.01
+    m = 21.5
+    X = np.array([19, 18, 22, 20, 16, 25])
+    X_m = X.mean()
+    S = 0
+    for X_i in X:
+        S += (X_i-X_m) ** 2
+    S = np.sqrt(S / (n-1))
+    t_0 = (X_m - m) / (S / np.sqrt(n))
+    print("t_0 = ", t_0)
+
+    print('a)')
+
+    t_a = t.ppf(1 - alfa/2, n-1)
+
+    print("C = (-inf, ", -t_a, "] U [", t_a, ", inf)")
+    
+    if t_0 <= -t_a or t_0 >= t_a:
+        print("t_0 in C => we reject H_0")
+    else:
+        print("t_0 not in C => we accept H_0")
+
+    L_a = X_m - t_a * S / np.sqrt(n)
+    R_a = X_m + t_a * S / np.sqrt(n)
+
+    print("[L, P] = [", L_a, ", ", R_a, "]")
+
+    print('b)')
+
+    t_b = t.ppf(1 - alfa, n-1)
+
+    print("C = (-inf, ", -t_b,"]")
+    
+    if t_0 <= -t_b:
+        print("t_0 in C => we reject H_0")
+    else:
+        print("t_0 not in C => we accept H_0")
+    
+    R_b = X_m + t_b * S / np.sqrt(n)
+
+    print("[-inf, P] = [-inf, ", R_b, "]")
+
 
 
 def t3():
