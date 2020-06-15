@@ -1,6 +1,6 @@
 import scipy.stats as stats
 from sympy.stats import Binomial, Uniform, density, P, E, variance
-
+from sympy import integrate, Symbol
 
 def t1():
     print('1')
@@ -26,6 +26,20 @@ def t3():
 
 def t4():
     print('4')
+    x = Symbol('x')
+
+    c = 3/4
+    f = c * x * (2 - x)
+
+    a = 0
+    b = 2
+
+    print("E(X) = ", integrate(f * x, (x, a, b)))
+
+    d = 0.5
+    e = 1.0
+
+    print("P(0.5< X <1) = ", integrate(f, (x, d, e)))
 
 
 def t5():
