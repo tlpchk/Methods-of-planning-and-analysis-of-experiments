@@ -1,11 +1,13 @@
 import scipy.stats as stats
-from sympy.stats import Binomial, Uniform, density, P, E, variance
 from sympy import integrate, Symbol
+from sympy.stats import Binomial, Uniform, density, P, E, variance
+
 
 def t1():
     print('1')
 
-    X = Binomial('X', 5, 0.2)
+    n, p = 5, 0.2
+    X = Binomial('X', n, p)
     p0 = density(X).dict[0]
     print('a)', p0)
 
@@ -18,17 +20,37 @@ def t1():
 
 def t2():
     print('2')
+    n, p = 1000, 0.002
+
+    print('P(X>=1) = 1 - P(X=0)')
+
+    X = Binomial('X', n, p)
+    print('a)', 1 - density(X).dict[0])
+
+    X = stats.poisson(n * p)
+
+    print('b)', 1 - X.cdf(0))
 
 
 def t3():
     print('3')
+
+    k = (-1, 2, 4, 6)
+    A = 1 - 0.2 - 0.4 - 0.3
+    pk = (0.2, 0.4, 0.3, A)
+
+    print('a)', f'A = {A}')
+
+    X = stats.rv_discrete(values=(k, pk))
+    print('b)', X.expect())
+    print('c)', X.var())
 
 
 def t4():
     print('4')
     x = Symbol('x')
 
-    c = 3/4
+    c = 3 / 4
     f = c * x * (2 - x)
 
     a = 0
@@ -76,16 +98,29 @@ def t6():
 def t7():
     print('7')
 
+    mu = 3.
+    sigma = 2.  # Attention! variance = sigma ^ 2
+    N0 = stats.norm(0, 1)
+
+    p = 0
+    a = 1 - N0.cdf((p - mu) / sigma)  # P(X>0) = 1 - P(X <= 0)
+    print('a)', a)
+
+    p1 = -5
+    p2 = 5
+    b = N0.cdf((p2 - mu) / sigma) - N0.cdf((p1 - mu) / sigma)  # P( -5 < X < 5)
+    print('a2)', b)
+
 
 def t8():
     print('8')
 
     X = Uniform(name='X', left=0, right=1)
-    Y = Binomial(name='Y', n=10, p=0.5) # TO JEST POLSKI BERNOULLI JBC
+    Y = Binomial(name='Y', n=10, p=0.5)  # TO JEST POLSKI BERNOULLI JBC
 
-    a = E(2*X - 3*Y)
+    a = E(2 * X - 3 * Y)
     b = E(X * Y)
-    c = variance((3*Y - X) / 2)
+    c = variance((3 * Y - X) / 2)
 
     print(f'a) {a}')
     print(f'b) {b}')
