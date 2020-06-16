@@ -1,9 +1,46 @@
 import numpy as np
-from scipy.stats import t
+from scipy.stats import t, norm
 
 
 def t1():
     print('1')
+    # Data
+    X = np.array([1.14, 1.06, 1.13, 1.17])
+    m = 1.05
+    alpha = 0.05
+    n = len(X)
+    X_m = X.mean()
+    S = 0.2
+
+    t_0 = (X_m - m) / (S / np.sqrt(n))
+    print("t_0 = ", t_0)
+
+    ## A
+    print("a)")
+    t_a = norm.ppf(1 - alpha) #quantile
+    print(f"C = [{t_a}, inf)")
+
+    if t_0 >= t_a:
+        print("t_0 in C => we reject H_0")
+    else:
+        print("t_0 not in C => we accept H_0")
+
+    L_a = X_m - t_a * S / np.sqrt(n)
+    print(f"[L, P] = [{L_a}, inf]")
+
+    ## B
+    print("b)")
+    t_b = norm.ppf(1 - alpha/2)
+    print(f"C = (-inf, {-t_b}] U [{t_b}, inf)")
+
+    if t_0 <= -t_b or t_0 >= t_b:
+        print("t_0 in C => we reject H_0")
+    else:
+        print("t_0 not in C => we accept H_0")
+
+    L_b = X_m - t_b * S / np.sqrt(n)
+    R_b = X_m + t_b * S / np.sqrt(n)
+    print(f"[L, P] = [{L_b}, {R_b}]")
 
 
 def t2():
@@ -50,7 +87,6 @@ def t2():
     R_b = X_m + t_b * S / np.sqrt(n)
 
     print("[-inf, P] = [-inf, ", R_b, "]")
-
 
 
 def t3():
